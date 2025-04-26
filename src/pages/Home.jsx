@@ -33,7 +33,7 @@ const Home = () => {
 
     return (
         <Layout>
-            <div className="border-b text-center text-2xl font-bold mb-2">
+            <div className="border-b text-center text-3xl md:text-7xl font-bold mb-2">
                 <h1>Notes</h1>
             </div>
             <div className="flex justify-center w-full">
