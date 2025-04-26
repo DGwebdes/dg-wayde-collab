@@ -1,0 +1,19 @@
+import React from "react";
+import Navbar from "../components/ui/Navbar";
+import Footer from "../components/ui/Footer";
+
+const Layout = ({ children }) => {
+    return (
+        <div className="w-full h-screen flex flex-col justify-between">
+            <nav className="px-10 py-4">
+                <Navbar />
+            </nav>
+            <main className="bg-gray-950 text-slate-100 flex-1 px-10 py-4">
+                {children}
+            </main>
+            <footer>{/* <Footer /> */}</footer>
+        </div>
+    );
+};
+
+export default Layout;
