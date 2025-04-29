@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import SpotlightCard from "./ui/SpotlightCard";
 
 const CreateNote = ({ value, onNewNote, onCreate }) => {
@@ -29,6 +30,7 @@ const CreateNote = ({ value, onNewNote, onCreate }) => {
                     >
                         Save
                     </button>
+                    <ToastContainer />
                 </div>
             </SpotlightCard>
         </div>

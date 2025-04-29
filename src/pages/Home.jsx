@@ -3,21 +3,27 @@ import Layout from "./Layout";
 import { createNote, getNotes } from "../lib/utils";
 import ListItem from "../components/ListItem";
 import CreateNote from "../components/CreateNote";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isNewNote, setIsNewNote] = useState(false);
     const [newNote, setNewNote] = useState({ title: "", body: "" });
+    const notifyError = () => toast("Something went Wrong");
+    const emptyFields = () => toast("Empty fields.");
 
     useEffect(() => {
         const fetchNotes = async () => {
             try {
                 const response = await getNotes();
+                if (!response.data) {
+                    notifyError();
+                }
                 setNotes(response.data);
                 setLoading(false);
             } catch (error) {
-                console.error(error);
+                notifyError(error);
             }
         };
         fetchNotes();
@@ -25,6 +31,7 @@ const Home = () => {
 
     const handleNoteUpdate = (id, updatedBody) => {
         if (!updatedBody) {
+            emptyFields();
             alert("Empty fields");
             return;
         }
@@ -40,7 +47,7 @@ const Home = () => {
 
     const handleCreateNote = () => {
         if (newNote.title === "" || newNote.body === "") {
-            alert("Empty fields");
+            emptyFields();
             return;
         }
         createNote(newNote);
@@ -91,6 +98,7 @@ const Home = () => {
                             ))}
                         </ul>
                     </div>
+                    <ToastContainer />
                 </>
             )}
         </Layout>
