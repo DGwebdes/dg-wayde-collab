@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const liveUrl = "http://localhost:9000/notes";
-// const liveUrl = "https://api-test-gold-three.vercel.app/notes";
+// const liveUrl = "http://localhost:9000/notes";
+const liveUrl = "https://api-test-gold-three.vercel.app/notes";
 
 export const editNote = async (noteId, data) => {
     try {
