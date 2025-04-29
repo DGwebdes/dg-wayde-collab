@@ -1,25 +1,37 @@
-import SpotlightCard from "./SpotlightCard";
+import SpotlightCard from "./ui/SpotlightCard";
 
-const CreateNote = ({ value, onNewNote }) => {
+const CreateNote = ({ value, onNewNote, onCreate }) => {
     return (
-        <SpotlightCard>
-            <div className="text-center font-bold py-2 text-amber-400">{}</div>
-            <div className="h-64 bg-gray-900/50 rounded px-2 py-1">
-                <textarea
-                    name="note-body"
-                    className="w-full h-full"
-                    defaultValue={value}
-                    onChange={(e) => onNewNote(e.target.value)}
-                ></textarea>
-                <div className="absolute bottom-0 left-0 w-full flex justify-between px-1">
-                    <button className=" text-gray-100 px-2 rounded">{}</button>
-
-                    <button className=" text-gray-100 px-2 rounded">
+        <div className="w-full md:w-[50%]">
+            <SpotlightCard>
+                <div className="text-center font-bold py-2 text-amber-400">
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        className="px-1"
+                        onChange={(e) =>
+                            onNewNote({ ...value, title: e.target.value })
+                        }
+                    />
+                </div>
+                <div className="flex flex-col gap-2 w-full h-64">
+                    <textarea
+                        name="note-body"
+                        className="w-full h-full px-1"
+                        defaultValue={value.body}
+                        onChange={(e) =>
+                            onNewNote({ ...value, body: e.target.value })
+                        }
+                    ></textarea>
+                    <button
+                        className="border text-gray-100 px-2 rounded self-center"
+                        onClick={onCreate}
+                    >
                         Save
                     </button>
                 </div>
-            </div>
-        </SpotlightCard>
+            </SpotlightCard>
+        </div>
     );
 };
 

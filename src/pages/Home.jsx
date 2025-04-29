@@ -8,7 +8,7 @@ const Home = () => {
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isNewNote, setIsNewNote] = useState(false);
-    const [newNote, setNewNote] = useState("");
+    const [newNote, setNewNote] = useState({ title: "", body: "" });
 
     useEffect(() => {
         const fetchNotes = async () => {
@@ -24,6 +24,10 @@ const Home = () => {
     }, []);
 
     const handleNoteUpdate = (id, updatedBody) => {
+        if (!updatedBody) {
+            alert("Empty fields");
+            return;
+        }
         setNotes((prevNotes) =>
             prevNotes.map((note) =>
                 note.id === id ? { ...note, body: updatedBody } : note,
@@ -34,15 +38,26 @@ const Home = () => {
         setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
     };
 
-    const handleNewNote = () => {
-        setIsNewNote(!isNewNote);
+    const handleCreateNote = () => {
+        if (newNote.title === "" || newNote.body === "") {
+            alert("Empty fields");
+            return;
+        }
+        createNote(newNote);
+        setNewNote({ title: "", body: "" });
+        setIsNewNote(false);
+        window.location = "/";
     };
 
     return (
         <Layout>
             {isNewNote && (
-                <div className=" bg-amber-200 absolute w-full inset-0 z-5 flex justify-center items-center">
-                    <CreateNote value={newNote} onNewNote={setNewNote} />
+                <div className="bg-zinc-900 absolute w-full h-full inset-0 z-5 flex justify-center items-center px-10">
+                    <CreateNote
+                        value={newNote}
+                        onNewNote={setNewNote}
+                        onCreate={handleCreateNote}
+                    />
                 </div>
             )}
             <div className="border-b text-center text-3xl md:text-7xl font-bold mb-2">
@@ -50,9 +65,9 @@ const Home = () => {
                     <h1>Notes</h1>
                     <button
                         className="text-sm md:text-2xl px-2 rounded hover:cursor-pointer border z-10"
-                        onClick={handleNewNote}
+                        onClick={() => setIsNewNote(!isNewNote)}
                     >
-                        Add Note
+                        {isNewNote ? "Cancel" : "Add Note"}
                     </button>
                 </div>
             </div>

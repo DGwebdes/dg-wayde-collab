@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { editNote, deleteNote } from "../lib/utils";
-import SpotlightCard from "./SpotlightCard";
+import SpotlightCard from "./ui/SpotlightCard";
 
 const ListItem = ({ item, onNoteUpdated, onDelete }) => {
     const [isEdit, setIsEdit] = useState(false);
@@ -40,7 +40,7 @@ const ListItem = ({ item, onNoteUpdated, onDelete }) => {
                 <div className="text-center font-bold py-2 text-amber-400">
                     {item.title}
                 </div>
-                <div className="h-64 relative bg-gray-900/50 rounded px-2 py-1">
+                <div className="h-64 relative bg-zinc-900/50 rounded px-2 py-1">
                     {isEdit ? (
                         <textarea
                             className="w-full h-full px-2"

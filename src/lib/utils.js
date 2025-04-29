@@ -32,6 +32,13 @@ export const deleteNote = async (noteId) => {
     }
 };
 
-export const createNote = () => {
-    console.log("Created");
+export const createNote = async (data) => {
+    // console.log("Created");
+    if (!data) return;
+    try {
+        const _ = await axios.post(liveUrl, data);
+        console.log("Done");
+    } catch (error) {
+        console.error(error);
+    }
 };
